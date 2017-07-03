@@ -8,17 +8,19 @@ var ReboundDancer = function(top, left, timeBetweenSteps) {
   this.x = left;
   this.y = top;
   this.velX = Math.floor(Math.random() * 8) - 4;
+  if (this.velX === 0) { this.velX++; }
   this.velY = Math.floor(Math.random() * 8) - 4;
+  if (this.velY === 0) { this.velY++; }
   this.angle = 180 * Math.atan(this.velY / this.velX);
   this.$node.css({ 'transform': 'rotate(' + (360 - this.angle) + 'deg)' });
 };
 
 ReboundDancer.prototype = Object.create(Dancer.prototype);
 ReboundDancer.prototype.constructor = ReboundDancer;
-ReboundDancer.prototype.oldStep = ReboundDancer.prototype.step;
+// ReboundDancer.prototype.oldStep = ReboundDancer.prototype.step;
 
 ReboundDancer.prototype.step = function() {
-  this.oldStep.call(this);
+  Dancer.prototype.step.call(this);
   // change position
   
   if (this.x && this.y) {
