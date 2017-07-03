@@ -31,10 +31,14 @@
 //   return dancer;
 // };
 
+        // ============================= //
+
 var Dancer = function(top, left, timeBetweenSteps) {
   this.$node = $('<span class="dancer"></span>');
   this.timeBetweenSteps = timeBetweenSteps;
-  this.step();
+  //Dancer.prototype.step();
+  this.step.call(this);
+  this.setPosition(top, left);
 };
 
 Dancer.prototype.step = function() {
