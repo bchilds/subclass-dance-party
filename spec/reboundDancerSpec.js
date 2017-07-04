@@ -25,17 +25,4 @@ describe('reboundDancer', function() {
     expect(reboundDancer.y).to.not.equal(y);
   });
 
-  describe('dance', function() {
-    xit('should call step at least once per second', function() {
-      sinon.spy(reboundDancer, 'step');
-      expect(reboundDancer.step.callCount).to.be.equal(0);
-      clock.tick(timeBetweenSteps); // ? it seems an extra tick is necessary...
-      clock.tick(timeBetweenSteps);
-
-      expect(reboundDancer.step.callCount).to.be.equal(1);
-
-      clock.tick(timeBetweenSteps);
-      expect(reboundDancer.step.callCount).to.be.equal(2);
-    });
-  });
 });

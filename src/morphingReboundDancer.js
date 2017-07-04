@@ -1,5 +1,5 @@
 var MorphingReboundDancer = function(top, left, timeBetweenSteps) {
-  ReboundDancer.call(this, top, left, 5);
+  ReboundDancer.call(this, top, left, 0);
 
   this.borderRad = 0;
   this.borderLeft = 10;
@@ -7,6 +7,8 @@ var MorphingReboundDancer = function(top, left, timeBetweenSteps) {
   this.borderBottom = 20;
   this.borderTop = 0;
   this.increaseOrDecrease = 1;
+  this.hueIncrease = 1;
+  this.hueVal = 0;
 };
 
 MorphingReboundDancer.prototype = Object.create(ReboundDancer.prototype);
@@ -32,12 +34,16 @@ MorphingReboundDancer.prototype.step = function () {
   this.borderRight += this.increaseOrDecrease * three;
   this.borderBottom += this.increaseOrDecrease * four;
 
+  this.hueVal += this.hueIncrease;
+  if (this.hueVal === 360 || this.hueVal === 0) {
+    this.hueIncrease *= -1;
+  }
+
   // var styleSettings = {
   //   'border': this.borderTop + '% ' + this.borderRight + '% ' + this.borderBottom + '% ' + this.borderLeft + '%'
   // };
 
   //this.$node.css(styleSettings);
-  
   this.$node.css('border-bottom', 'solid ' + this.borderBottom + 'px limegreen');
   this.$node.css('border-right', 'solid ' + this.borderRight + 'px transparent');
   this.$node.css('border-left', 'solid ' + this.borderLeft + 'px transparent');
@@ -45,6 +51,9 @@ MorphingReboundDancer.prototype.step = function () {
   this.$node.css({ 'transform': 'rotate("")'});
   this.angle++;
   this.$node.css({ 'transform': 'rotate(' + (this.angle) + 'deg)' });
+  this.$node.css('border-color', 'hsl(' + this.hueVal * Math.floor(Math.random() * 360) + ', 100%, 50%)');
+  this.$node.css('background-color', 'hsl(' + this.hueVal + ', 100%, 50%)');
+
 };
 
 
