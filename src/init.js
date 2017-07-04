@@ -23,11 +23,22 @@ $(document).ready(function() {
     // make a dancer with a random position
 
     var dancer = dancerMakerFunction(
-      $("body").height() * Math.random(),
-      $("body").width() * Math.random(),
+      $('body').height() * Math.random(),
+      $('body').width() * Math.random(),
       Math.random() * 1000
     );
     $('body').append(dancer.$node);
+  });
+
+
+  $(window).mousemove( function(event) {
+    //do a hitbox check?
+    //console.log(event.pageX + ", " + event.pageY);
+    var mouseCoords = [event.pageX, event.pageY];
+    if (mouseCoords[0] >= ($('.repulsive-dancer').centerPosition[0] - $('.repulsive-dancer').range) && mouseCoords[0] <= ($('.repulsive-dancer').centerPosition[0] + $('.repulsive-dancer').range) && mouseCoords[1] >= ($('.repulsive-dancer').centerPosition[1] - $('.repulsive-dancer').range) && mouseCoords[1] <= ($('.repulsive-dancer').centerPosition[1] + $('.repulsive-dancer').range) ) {
+      $('.repulsive-dancer').velocity[0] = 1;
+      $('.repulsive-dancer').velocity[1] = 1;
+    }
   });
 });
 
